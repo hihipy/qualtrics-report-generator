@@ -101,8 +101,6 @@ cd qualtrics-report-generator
    - ☑️ **Include display order columns** (optional but helpful)
 5. Click **Download**
 
-![Export Settings](docs/export-settings.png)
-
 ### Step 2: Download QSF File (Recommended)
 
 The QSF file contains your survey definition with proper question text and choice labels. **This produces much better reports.**
@@ -300,11 +298,6 @@ Safe for deuteranopia, protanopia, and tritanopia.
 qualtrics-report-generator/
 ├── qualtrics_report_generator.py   # Main script (GUI + CLI)
 ├── README.md                       # This file
-├── LICENSE                         # CC BY-NC-ND 4.0
-└── examples/
-    ├── sample_survey.csv           # Example export
-    ├── sample_survey.qsf           # Example survey definition
-    └── sample_report.html          # Example output
 ```
 
 ---
@@ -332,4 +325,5 @@ Distributed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 
 2. **Download both CSV and QSF** – QSF provides accurate labels
 3. **Use consistent naming** – `survey.csv` + `survey.qsf` enables auto-detection
 4. **Review in debug mode first** – Helps identify any parsing issues
+
 5. **Re-export if needed** – Qualtrics exports can sometimes be inconsistent
