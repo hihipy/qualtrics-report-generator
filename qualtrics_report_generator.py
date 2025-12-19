@@ -14,8 +14,8 @@ Features:
     - CLI and GUI interfaces
 
 Usage:
-    CLI:  python qualtrics_report_generator.py -q survey.qsf survey.csv
-    GUI:  python qualtrics_report_generator.py (no arguments)
+    CLI: python qualtrics_report_generator.py -q survey.qsf survey.csv
+    GUI: python qualtrics_report_generator.py (no arguments)
 """
 
 import json
@@ -178,13 +178,13 @@ def setup_logging(debug=False, log_file=None):
 
     Args:
         debug: If True, sets logging level to DEBUG; otherwise WARNING.
-        log_file: Optional path to write log output to file.
+        log_file: Optional path to write log output to the file.
     """
     level = logging.DEBUG if debug else logging.WARNING
     logger.setLevel(level)
     logger.handlers.clear()
 
-    # Console handler with simple format
+    # Console handler with a simple format
     formatter = logging.Formatter(
         '%(asctime)s | %(levelname)-8s | %(message)s',
         datefmt='%H:%M:%S'
@@ -194,7 +194,7 @@ def setup_logging(debug=False, log_file=None):
     console.setFormatter(formatter)
     logger.addHandler(console)
 
-    # Optional file handler with detailed format including function names
+    # Optional file handler with a detailed format including function names
     if log_file:
         file_handler = logging.FileHandler(log_file, mode='w', encoding='utf-8')
         file_handler.setLevel(level)
@@ -214,7 +214,7 @@ def parse_qsf(qsf_path):
     Parse a Qualtrics QSF file to extract question metadata.
 
     The QSF (Qualtrics Survey Format) file contains the complete survey
-    definition including question types, choice labels, answer labels,
+     definition, including question types, choice labels, answer labels,
     and display logic. This function extracts the metadata needed to
     properly label and format responses in the HTML report.
 
@@ -251,7 +251,7 @@ def parse_qsf(qsf_path):
         selector = payload.get('Selector', '')
         subselector = payload.get('SubSelector')
 
-        # Map QSF type to internal display type
+        # Map the QSF type to an internal display type
         type_key = (qtype, selector, subselector)
         internal_type = QSF_TYPE_MAP.get(type_key)
 
@@ -410,10 +410,10 @@ def safe_str(value):
     """
     Safely convert any value to a stripped string.
 
-    Handles NaN/None values gracefully by returning empty string.
+    Handles NaN/None values gracefully by returning an empty string.
 
     Args:
-        value: Any value (may be None, NaN, or any type).
+        value: Any value (maybe None, NaN, or any type).
 
     Returns:
         String representation, stripped of whitespace.
@@ -446,21 +446,21 @@ def is_empty(value):
         value: Value to check.
 
     Returns:
-        True if value is NaN, None, or empty string.
+        True if the value is NaN, None, or empty string.
     """
     return pd.isna(value) or safe_str(value) == ''
 
 
 def contains_any(text, keywords):
     """
-    Check if text contains any of the keywords (case-insensitive).
+    Check if the text contains any of the keywords (case-insensitive).
 
     Args:
         text: Text to search.
         keywords: List of keywords to look for.
 
     Returns:
-        True if any keyword is found in text.
+        True if any keyword is found in the text.
     """
     text_lower = text.lower()
     return any(kw in text_lower for kw in keywords)
@@ -468,7 +468,7 @@ def contains_any(text, keywords):
 
 def sort_row_key(key):
     """
-    Generate sort key for row ordering.
+    Generate a sort key for row ordering.
 
     Sorts numeric keys first (by value), then alphabetic keys.
     This ensures rows display in intuitive order (1, 2, 3, ... then A, B, C).
@@ -514,7 +514,7 @@ def is_numeric_value(value):
 
 def values_are_numeric_data(values):
     """
-    Determine if values represent numeric data points vs categorical selections.
+    Determine if values represent numeric data points vs. categorical selections.
 
     Used to decide between data table display (for numbers) and checkmark
     table display (for categories).
@@ -605,7 +605,7 @@ def values_are_unique_data(values):
 
 def is_numeric_code(value, question_text=''):
     """
-    Check if value appears to be a Qualtrics numeric code rather than real data.
+    Check if the value appears to be a Qualtrics numeric code rather than real data.
 
     Qualtrics exports may contain internal selection codes (1, 2, 3) instead
     of label text. This function distinguishes codes from legitimate numeric
@@ -616,13 +616,13 @@ def is_numeric_code(value, question_text=''):
         question_text: Question text for context (numeric keywords).
 
     Returns:
-        True if value appears to be an internal code.
+        True if the value appears to be an internal code.
     """
     val = safe_str(value)
     if not val:
         return False
 
-    # If question asks for numbers, treat numeric values as data
+    # If the question asks for numbers, treat numeric values as data
     if contains_any(question_text, NUMERIC_QUESTION_KEYWORDS):
         return False
 
@@ -646,19 +646,19 @@ def is_numeric_code(value, question_text=''):
 
 
 def is_url(value):
-    """Check if value is a URL."""
+    """Check if the value is a URL."""
     val = safe_str(value).lower()
     return any(val.startswith(p) for p in ('http://', 'https://', 'www.', 'ftp://'))
 
 
 def is_file_path(value):
-    """Check if value looks like a filename."""
+    """Check if the value looks like a filename."""
     val = safe_str(value).lower()
     return any(val.endswith(ext) for ext in FILE_EXTENSIONS)
 
 
 def is_coordinate(value):
-    """Check if value looks like coordinate/heat map data."""
+    """Check if the value looks like coordinate/heat map data."""
     val = safe_str(value)
     patterns = [
         r'^\d+\.?\d*\s*,\s*\d+\.?\d*$',           # 123,456
@@ -675,21 +675,21 @@ def is_timing_column(column_id):
 
 
 def is_json(value):
-    """Check if value looks like JSON data."""
+    """Check if the value looks like JSON data."""
     val = safe_str(value)
     return ((val.startswith('{') and val.endswith('}'))
             or (val.startswith('[') and val.endswith(']')))
 
 
 def is_hierarchical(value):
-    """Check if value is hierarchical/drill-down data."""
+    """Check if the value is hierarchical/drill-down data."""
     val = safe_str(value)
     return ' > ' in val or ' >> ' in val or ' → ' in val
 
 
 def is_multi_value(value, separator=','):
     """
-    Check if value is a multi-value list.
+    Check if the value is a multi-value list.
 
     Distinguishes genuine multi-value responses from coordinates or
     numeric codes.
@@ -715,7 +715,7 @@ def is_multi_value(value, separator=','):
     if is_coordinate(value):
         return False
 
-    # Need at least 2 substantial parts
+    # Need at least 2 significant parts
     text_parts = [p.strip() for p in parts if len(p.strip()) > 2]
     if len(text_parts) < 2:
         return False
@@ -729,13 +729,13 @@ def is_multi_value(value, separator=','):
 
 
 def is_long_text(value):
-    """Check if value is long-form text."""
+    """Check if the value is long-form text."""
     return len(safe_str(value)) > LONG_TEXT_THRESHOLD
 
 
 def detect_value_type(value, question_text='', column_id=''):
     """
-    Detect the type of a value for appropriate formatting.
+    Detect the type of value for appropriate formatting.
 
     Analyzes the value content to determine the best display format.
 
@@ -858,7 +858,7 @@ def format_timing(value, column_id):
     """
     val = safe_str(value)
 
-    # Determine label based on column type
+    # Determine a label based on a column type
     if 'Page Submit' in column_id or 'PageSubmit' in column_id:
         label = "Page time"
     elif 'First Click' in column_id or 'FirstClick' in column_id:
@@ -896,7 +896,7 @@ def format_hierarchical(value):
     """Format hierarchical/drill-down data with visual breadcrumb trail."""
     val = safe_str(value)
 
-    # Detect separator type
+    # Detect a separator type
     for sep in [' >> ', ' → ', ' > ']:
         if sep in val:
             parts = val.split(sep)
@@ -1036,7 +1036,7 @@ def extract_matrix_labels(text):
     # Protect date ranges like "2024 - 2025" from being split
     protected = re.sub(r'(\d{4})\s*-\s*(\d{4})', r'\1__DATERANGE__\2', cleaned)
 
-    # Split on " - " separator
+    # Split on "-" separator
     parts = re.split(r'\s+-\s+', protected)
 
     # Restore date ranges
@@ -1063,8 +1063,8 @@ def validate_csv(csv_path):
         csv_path: Path to CSV file.
 
     Raises:
-        FileNotFoundError: If file doesn't exist.
-        ValueError: If file cannot be read as CSV.
+        FileNotFoundError: If a file doesn't exist.
+        ValueError: If a file cannot be read as CSV.
     """
     if not os.path.exists(csv_path):
         raise FileNotFoundError(f"File not found: {csv_path}")
@@ -1112,7 +1112,7 @@ def get_label_from_qsf(qsf_info, csv_index, label_type='choice'):
     Args:
         qsf_info: Dictionary with 'choices', 'choice_order', 'answers', 'answer_order'.
         csv_index: The index from the CSV column (e.g., '1', '2', '5').
-        label_type: 'choice' for row labels, 'answer' for column labels.
+        Label_type: 'choice' for row labels, 'answer' for column labels.
 
     Returns:
         The label string or a fallback like "Row X".
@@ -1121,7 +1121,7 @@ def get_label_from_qsf(qsf_info, csv_index, label_type='choice'):
         choices = qsf_info.get('choices', {})
         choice_order = qsf_info.get('choice_order', [])
 
-        # First, try direct lookup (in case CSV index matches QSF ID)
+        # First, try direct lookup (in case the CSV index matches QSF ID)
         if csv_index in choices:
             return choices[csv_index]
 
@@ -1145,7 +1145,7 @@ def get_label_from_qsf(qsf_info, csv_index, label_type='choice'):
         if csv_index in answers:
             return answers[csv_index]
 
-        # Otherwise, treat as 1-based position
+        # Otherwise, treat as a 1-based position
         try:
             idx = int(csv_index) - 1
             if 0 <= idx < len(answer_order):
@@ -1160,7 +1160,7 @@ def get_label_from_qsf(qsf_info, csv_index, label_type='choice'):
 
 def extract_questions_with_qsf(csv_path, qsf_metadata):
     """
-    Extract question structure using QSF metadata for accurate types.
+    Extract the question structure using QSF metadata for accurate types.
 
     Combines CSV column structure with QSF metadata to produce accurate
     question definitions with proper labels.
@@ -1193,14 +1193,14 @@ def extract_questions_with_qsf(csv_path, qsf_metadata):
         # Parse column ID patterns: Q1, Q1_1, Q1_1_2, Q1_TEXT, Q1_1_TEXT
         match = re.match(r'Q(\d+)(?:_(\d+))?(?:_(\d+))?(_TEXT)?$', col_id)
         if not match:
-            # Try alternate pattern: Q1_other
+            # Try an alternate pattern: Q1_other
             match = re.match(r'Q(\d+)(?:_(.+))?$', col_id)
             if not match:
                 continue
 
         base_q = f"Q{match.group(1)}"
 
-        # Extract sub-indices based on match groups
+        # Extract subindices based on match groups
         if len(match.groups()) >= 4:
             sub1 = match.group(2)
             sub2 = match.group(3)
@@ -1214,7 +1214,7 @@ def extract_questions_with_qsf(csv_path, qsf_metadata):
             sub2 = None
             is_text_field = False
 
-        # Handle non-numeric sub-parts (like Q1_TEXT)
+        # Handle non-numeric subparts (like Q1_TEXT)
         if sub1 and not sub1.isdigit():
             if sub1 == 'TEXT':
                 is_text_field = True
@@ -1277,7 +1277,7 @@ def extract_questions_with_qsf(csv_path, qsf_metadata):
                     q['col_order'].append(sub2)
 
             elif sub1:
-                # Matrix with single column (text entry per row)
+                # Matrix with a single column (text entry per row)
                 row_label = get_label_from_qsf(qsf_info, sub1, 'choice')
                 if sub1 not in q['rows']:
                     q['rows'][sub1] = {'id': col_id, 'label': row_label}
@@ -1297,7 +1297,7 @@ def extract_questions_with_qsf(csv_path, qsf_metadata):
                     q['rows'][sub1] = {'id': col_id, 'label': item_label}
 
         else:
-            # Unknown type - infer from column pattern
+            # Unknown type - infer from a column pattern
             if sub1 and sub2:
                 q['type'] = 'matrix'
 
@@ -1404,7 +1404,7 @@ def extract_questions_from_csv(csv_path):
 
         q = questions[base_q]
 
-        # Keep longest question text
+        # Keep the longest question text
         if len(base_text) > len(q['text']):
             q['text'] = base_text
 
@@ -1452,7 +1452,7 @@ def extract_questions_from_csv(csv_path):
 
 def get_respondent_info(row, index=0):
     """
-    Extract respondent identification info from response row.
+    Extract respondent identification info from the response row.
 
     Tries multiple fields to find the best identifier for the respondent.
 
@@ -1475,7 +1475,7 @@ def get_respondent_info(row, index=0):
     resp_id = get_val('ResponseId')
     ext_ref = get_val('ExternalReference')
 
-    # Determine display name (priority: name > email > ref > id > anonymous)
+    # Determine the display name (priority: name > email > ref > id > anonymous)
     if first:
         name = f"{first} {last}".strip()
     elif email:
@@ -1503,7 +1503,7 @@ def format_respondent_header(info, show_meta=True):
         show_meta: Whether to include response ID.
 
     Returns:
-        HTML string for respondent header.
+        HTML string for the respondent header.
     """
     html = f"<span class='respondent-name-main'>{safe_html(info['name'])}</span>"
 
@@ -1518,7 +1518,7 @@ def format_respondent_header(info, show_meta=True):
 
 def has_response(question, row):
     """
-    Check if respondent answered this question.
+    Check if the respondent answered this question.
 
     Args:
         question: Question metadata dictionary.
@@ -1543,7 +1543,7 @@ def has_response(question, row):
 
 def format_matrix_response(question, row):
     """
-    Format matrix question response as HTML table.
+    Format matrix question response as an HTML table.
 
     Creates a grid with row labels on the left and column headers on top.
 
@@ -1614,7 +1614,7 @@ def format_matrix_response(question, row):
         return ''.join(html_parts)
 
     else:
-        # Matrix with single column per row - use grouped format
+        # Matrix with a single column per row - use a grouped format
         return format_grouped_response(question, row)
 
 
@@ -1638,14 +1638,14 @@ def format_form_response(question, row):
 
     items = []
 
-    # If rows_data is empty but we have columns, create items from columns
+    # If rows_data is empty, but we have columns, create items from columns
     if not rows_data and question['columns']:
         for col_id in question['columns']:
             value = row.get(col_id)
             if is_empty(value):
                 continue
 
-            # Try to extract label from column ID
+            # Try to extract the label from column ID
             match = re.match(r'Q\d+_(\d+)', col_id)
             if match:
                 sub_id = match.group(1)
@@ -1724,7 +1724,7 @@ def format_grouped_response(question, row):
         if len(values) == 1:
             return format_value(values[0][1], q_text, values[0][0])
 
-        # Multiple values - show as list
+        # Multiple values - show as a list
         html_parts = ["<ul class='vertical-list'>"]
         for col_id, val in values:
             html_parts.append(f"<li>{format_value(val, q_text, col_id)}</li>")
@@ -1757,7 +1757,7 @@ def format_grouped_response(question, row):
     if not items:
         return format_empty()
 
-    # --- Determine display format based on value analysis ---
+    # --- Determine a display format based on value analysis ---
 
     # Numeric data gets data table format
     if values_are_numeric_data(all_values):
@@ -1767,7 +1767,7 @@ def format_grouped_response(question, row):
     if values_are_unique_data(all_values):
         return _format_as_data_table(items, q_text)
 
-    # Analyze for categorical/selection pattern
+    # Analyze for a categorical/selection pattern
     all_selections = set()
     is_multiselect_pattern = True
 
@@ -1797,15 +1797,14 @@ def format_grouped_response(question, row):
             item['selections'] = None
             item['is_categorical'] = False
 
-    # Decide on checkmark table vs data table
+    # Decide on checkmark table vs. data table
     unique_ratio = len(all_selections) / len(items) if items else 1
 
     use_checkmark_table = (
-        len(all_selections) >= 2
-        and len(all_selections) <= 10
-        and unique_ratio <= 0.7
-        and is_multiselect_pattern
-        and all(item.get('is_categorical', False) for item in items)
+		    2 <= len(all_selections) <= 10
+		    and unique_ratio <= 0.7
+		    and is_multiselect_pattern
+		    and all(item.get('is_categorical', False) for item in items)
     )
 
     if use_checkmark_table:
@@ -1852,7 +1851,7 @@ def _format_as_checkmark_table(items, all_selections):
 
 
 def format_single_response(question, row):
-    """Format single question response."""
+    """Format a single question response."""
     col_id = question['columns'][0] if question['columns'] else None
     if not col_id:
         return format_empty()
@@ -1872,7 +1871,7 @@ def format_single_response(question, row):
 
 def generate_css():
     """
-    Generate complete CSS stylesheet for HTML report.
+    Generate a complete CSS stylesheet for an HTML report.
 
     Returns responsive, colorblind-friendly CSS with print support.
     """
@@ -2269,7 +2268,7 @@ def generate_css():
 
 def generate_html(questions, respondents, debug_mode=False, has_qsf=False):
     """
-    Generate complete HTML report from parsed questions and responses.
+    Generate a complete HTML report from parsed questions and responses.
 
     Args:
         questions: Dictionary of question metadata.
@@ -2374,7 +2373,7 @@ def generate_html(questions, respondents, debug_mode=False, has_qsf=False):
             for resp in answered:
                 header = format_respondent_header(resp['info'])
 
-                # Choose formatter based on question type
+                # Choose a formatter based on a question type
                 qtype = question['type']
                 internal_type = question.get('internal_type', '')
 
@@ -2421,13 +2420,13 @@ def generate_html(questions, respondents, debug_mode=False, has_qsf=False):
 def process_qualtrics(csv_path, output_html='qualtrics_report.html',
                       qsf_path=None, progress_callback=None, debug_mode=False):
     """
-    Process Qualtrics CSV and generate HTML report.
+    Process Qualtrics CSV and generate an HTML report.
 
     Main entry point for report generation. Handles the complete workflow
     from parsing to HTML output.
 
     Args:
-        csv_path: Path to Qualtrics CSV export file.
+        csv_path: Path to a Qualtrics CSV export file.
         output_html: Output HTML file path.
         qsf_path: Optional path to QSF file for accurate question types.
         progress_callback: Optional function for progress updates (GUI).
@@ -2641,7 +2640,7 @@ if TKINTER_AVAILABLE:
                 messagebox.showerror("Error", "Input file not found")
                 return
 
-            # Disable button and start progress
+            # Disable the button and start progress
             self.btn.config(state='disabled')
             self.progress.start(10)
 
@@ -2658,7 +2657,7 @@ if TKINTER_AVAILABLE:
                 self.progress.stop()
                 self._update_status("✅ Complete!")
 
-                # Show success message
+                # Show a success message
                 qsf_msg = " (with QSF metadata)" if qsf else " (CSV inference)"
                 msg = (
                     f"Report generated{qsf_msg}!\n\n"
