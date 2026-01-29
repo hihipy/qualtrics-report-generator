@@ -1,12 +1,12 @@
 # Qualtrics Report Generator
 
-**A Python utility that converts Qualtrics CSV exports into beautifully formatted, human-readable HTML reports.**
+A Python utility that converts Qualtrics CSV exports into formatted, readable HTML reports.
 
-Built for **administrative data intake surveys** where different respondents complete different sections—such as institutional reporting surveys, compliance questionnaires, and rankings data collection—where you need to review each response in context rather than aggregate statistics.
+Built for **administrative data intake surveys** where different respondents complete different sections, such as institutional reporting surveys, compliance questionnaires, and rankings data collection. Use this when you need to review each response in context rather than aggregate statistics.
 
 ---
 
-## 🎯 Why This Tool Exists
+## Why This Tool Exists
 
 Standard Qualtrics reports are designed for traditional surveys with many respondents answering the same questions. But many institutional surveys work differently:
 
@@ -16,33 +16,33 @@ Standard Qualtrics reports are designed for traditional surveys with many respon
 | You want: percentages, charts, trends | You want: readable responses organized by question |
 | Qualtrics Reports work great | Qualtrics Reports are awkward and hard to review |
 
-**This tool solves the data intake problem** by generating a clean HTML report where each question displays its respondent(s) and their answers in a readable format—perfect for review, validation, and sharing.
+This tool solves the data intake problem by generating a clean HTML report where each question displays its respondent(s) and their answers in a readable format. Good for review, validation, and sharing.
 
 ---
 
-## 📋 Use Cases
+## Use Cases
 
-### 1. Institutional Rankings Surveys
-> *"We submit data to U.S. News for medical school rankings. Seven different administrators each complete their section (Admissions, Financial Aid, Research, etc.). I need to review all responses before submission."*
+### Institutional Rankings Surveys
+> "We submit data to U.S. News for medical school rankings. Seven different administrators each complete their section (Admissions, Financial Aid, Research, etc.). I need to review all responses before submission."
 
-### 2. Accreditation & Compliance Reporting
-> *"Our accreditation self-study survey has 200+ questions across 15 departments. Each department head answers their section. I need to compile and review everything."*
+### Accreditation & Compliance Reporting
+> "Our accreditation self-study survey has 200+ questions across 15 departments. Each department head answers their section. I need to compile and review everything."
 
-### 3. Annual Data Collection
-> *"Every year we collect enrollment, financial, and outcomes data from program directors. I need a readable report to verify numbers before they go to leadership."*
+### Annual Data Collection
+> "Every year we collect enrollment, financial, and outcomes data from program directors. I need a readable report to verify numbers before they go to leadership."
 
-### 4. Grant Progress Reports
-> *"Multiple PIs report on their grant activities quarterly. I need to review all responses and share a summary with the grants office."*
+### Grant Progress Reports
+> "Multiple PIs report on their grant activities quarterly. I need to review all responses and share a summary with the grants office."
 
-### 5. Multi-Stakeholder Intake Forms
-> *"Different offices submit budget requests through Qualtrics. Finance needs to review all submissions in one document."*
+### Multi-Stakeholder Intake Forms
+> "Different offices submit budget requests through Qualtrics. Finance needs to review all submissions in one document."
 
-### 6. Quality Assurance Review
-> *"Before submitting our IPEDS data, I need to review every response to catch errors, missing data, or inconsistencies."*
+### Quality Assurance Review
+> "Before submitting our IPEDS data, I need to review every response to catch errors, missing data, or inconsistencies."
 
 ---
 
-## ✨ Features
+## Features
 
 | Feature | Description |
 |---------|-------------|
@@ -52,19 +52,19 @@ Standard Qualtrics reports are designed for traditional surveys with many respon
 | **Dual Interface** | GUI for interactive use, CLI for automation and scripting |
 | **Rich Value Formatting** | Detects URLs, files, coordinates, JSON, dates, and more |
 | **Colorblind-Friendly** | Accessible color palette (blue/teal/orange) safe for all vision types |
-| **XSS-Safe Output** | All content escaped—safe to host or share publicly |
+| **XSS-Safe Output** | All content escaped. Safe to host or share publicly |
 | **Debug Mode** | Optional metadata showing question types and column counts |
 
 ---
 
-## 📦 Requirements
+## Requirements
 
 **Python 3.8+** with pandas:
 ```bash
 pip install pandas
 ```
 
-### Linux – Installing Tkinter (for GUI)
+### Linux: Installing Tkinter (for GUI)
 ```bash
 # Debian/Ubuntu
 sudo apt-get install python3-tk
@@ -77,7 +77,7 @@ sudo dnf install python3-tkinter
 
 ---
 
-## 🚀 Installation
+## Installation
 ```bash
 # Download the script
 curl -O https://raw.githubusercontent.com/your-username/qualtrics-report-generator/main/qualtrics_report_generator.py
@@ -89,24 +89,24 @@ cd qualtrics-report-generator
 
 ---
 
-## 📥 Exporting Data from Qualtrics
+## Exporting Data from Qualtrics
 
 ### Step 1: Export CSV with Choice Text
 
 1. Open your survey in Qualtrics
-2. Go to **Data & Analysis** → **Export & Import** → **Export Data**
+2. Go to **Data & Analysis** > **Export & Import** > **Export Data**
 3. Select **CSV** format
 4. **Important:** Under "More Options", ensure:
-   - ☑️ **Use choice text** (not numeric values)
-   - ☑️ **Include display order columns** (optional but helpful)
+   - Use choice text (not numeric values)
+   - Include display order columns (optional but helpful)
 5. Click **Download**
 
 ### Step 2: Download QSF File (Recommended)
 
-The QSF file contains your survey definition with proper question text and choice labels. **This produces much better reports.**
+The QSF file contains your survey definition with proper question text and choice labels. This produces much better reports.
 
 1. Go to **Survey** tab
-2. Click **Tools** → **Import/Export** → **Export Survey**
+2. Click **Tools** > **Import/Export** > **Export Survey**
 3. Save the `.qsf` file in the same folder as your CSV
 
 ### File Naming Tip
@@ -121,16 +121,16 @@ The tool will automatically find the QSF if it shares the same base name.
 
 ---
 
-## 🖥️ Usage
+## Usage
 
 ### GUI Mode (Default)
 ```bash
 python qualtrics_report_generator.py
 ```
 
-1. **Browse** → Select your CSV file
-2. **Browse** → Select your QSF file (optional but recommended)
-3. **Browse** → Choose output location
+1. **Browse** > Select your CSV file
+2. **Browse** > Select your QSF file (optional but recommended)
+3. **Browse** > Choose output location
 4. Optionally check **Include debug info**
 5. Click **Generate Report**
 
@@ -164,7 +164,7 @@ python qualtrics_report_generator.py -q survey.qsf -l debug.log survey.csv
 
 ---
 
-## 📊 Supported Question Types
+## Supported Question Types
 
 | Question Type | Column Pattern | How It's Displayed |
 |--------------|----------------|-------------------|
@@ -175,20 +175,20 @@ python qualtrics_report_generator.py -q survey.qsf -l debug.log survey.csv
 | **Form Fields** | `Q1_1`, `Q1_2` | Label: value pairs |
 | **Grouped Items** | `Q1_1`, `Q1_2` | Structured list or table |
 | **Multi-Select** | Comma-separated | Bullet list |
-| **File Upload** | URL detected | 📎 Download link |
+| **File Upload** | URL detected | Download link |
 | **Slider/Scale** | Numeric | Formatted number |
 | **Drill-Down** | `>` or `→` separators | Breadcrumb display |
 
 ---
 
-## 📄 Output Format
+## Output Format
 
-The generator produces a **single, self-contained HTML file** with embedded CSS. No external dependencies—just open in any browser.
+The generator produces a single, self-contained HTML file with embedded CSS. No external dependencies. Just open in any browser.
 
 ### Report Structure
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  📋 Qualtrics Survey Report                                 │
+│  Qualtrics Survey Report                                    │
 │  Generated on December 19, 2025 at 2:30 PM                  │
 ├─────────────────────────────────────────────────────────────┤
 │  ┌─────────┐  ┌─────────┐  ┌─────────────────┐              │
@@ -239,7 +239,7 @@ The generator produces a **single, self-contained HTML file** with embedded CSS.
 
 ---
 
-## 🎨 Color Palette
+## Color Palette
 
 Uses a colorblind-friendly palette based on Paul Tol's research:
 
@@ -255,7 +255,7 @@ Safe for deuteranopia, protanopia, and tritanopia.
 
 ---
 
-## 🔧 With vs Without QSF
+## With vs Without QSF
 
 | Aspect | Without QSF | With QSF |
 |--------|-------------|----------|
@@ -268,7 +268,7 @@ Safe for deuteranopia, protanopia, and tritanopia.
 
 ---
 
-## 🛠️ Technical Details
+## Technical Details
 
 | Aspect | Detail |
 |--------|--------|
@@ -281,7 +281,7 @@ Safe for deuteranopia, protanopia, and tritanopia.
 
 ---
 
-## ❗ Troubleshooting
+## Troubleshooting
 
 | Issue | Solution |
 |-------|----------|
@@ -293,7 +293,7 @@ Safe for deuteranopia, protanopia, and tritanopia.
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 ```
 qualtrics-report-generator/
 ├── qualtrics_report_generator.py   # Main script (GUI + CLI)
@@ -302,28 +302,26 @@ qualtrics-report-generator/
 
 ---
 
-## 📜 License
+## License
 
-**Qualtrics Report Generator** © 2025 Philip Bachas-Daunert
+Qualtrics Report Generator © 2025 Philip Bachas-Daunert
 
 Distributed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/) license.
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
-- **pandas** – Data manipulation engine
-- **Tkinter** – Cross-platform GUI framework
-- **Paul Tol** – Colorblind-safe palette research
-- **Anthropic Claude** – Development assistance
+- **pandas** - Data manipulation engine
+- **Tkinter** - Cross-platform GUI framework
+- **Paul Tol** - Colorblind-safe palette research
 
 ---
 
-## 💡 Tips for Best Results
+## Tips for Best Results
 
-1. **Always export with "Use choice text"** – Numeric codes require the QSF to decode
-2. **Download both CSV and QSF** – QSF provides accurate labels
-3. **Use consistent naming** – `survey.csv` + `survey.qsf` enables auto-detection
-4. **Review in debug mode first** – Helps identify any parsing issues
-
-5. **Re-export if needed** – Qualtrics exports can sometimes be inconsistent
+1. **Always export with "Use choice text"** - Numeric codes require the QSF to decode
+2. **Download both CSV and QSF** - QSF provides accurate labels
+3. **Use consistent naming** - `survey.csv` + `survey.qsf` enables auto-detection
+4. **Review in debug mode first** - Helps identify any parsing issues
+5. **Re-export if needed** - Qualtrics exports can sometimes be inconsistent
