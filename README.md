@@ -302,22 +302,6 @@ qualtrics-report-generator/
 
 ---
 
-## License
-
-Qualtrics Report Generator © 2025 Philip Bachas-Daunert
-
-Distributed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/) license.
-
----
-
-## Acknowledgments
-
-- **pandas** - Data manipulation engine
-- **Tkinter** - Cross-platform GUI framework
-- **Paul Tol** - Colorblind-safe palette research
-
----
-
 ## Tips for Best Results
 
 1. **Always export with "Use choice text"** - Numeric codes require the QSF to decode
@@ -325,3 +309,16 @@ Distributed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 
 3. **Use consistent naming** - `survey.csv` + `survey.qsf` enables auto-detection
 4. **Review in debug mode first** - Helps identify any parsing issues
 5. **Re-export if needed** - Qualtrics exports can sometimes be inconsistent
+
+## License
+
+This project is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+You are free to:
+- Use, share, and adapt this work
+- Use it at your job
+
+Under these terms:
+- **Attribution** — Credit the original author
+- **NonCommercial** — No selling or commercial products
+- **ShareAlike** — Derivatives must use the same license
