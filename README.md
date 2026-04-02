@@ -80,10 +80,10 @@ sudo dnf install python3-tkinter
 ## Installation
 ```bash
 # Download the script
-curl -O https://raw.githubusercontent.com/your-username/qualtrics-report-generator/main/qualtrics_report_generator.py
+curl -O https://raw.githubusercontent.com/hihipy/qualtrics-report-generator/main/qualtrics_report_generator.py
 
 # Or clone the repository
-git clone https://github.com/your-username/qualtrics-report-generator.git
+git clone https://github.com/hihipy/qualtrics-report-generator.git
 cd qualtrics-report-generator
 ```
 
