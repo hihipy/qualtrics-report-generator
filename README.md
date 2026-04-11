@@ -1,4 +1,4 @@
-# Qualtrics Report Generator
+# qualtrics-report-generator
 
 A Python utility that converts Qualtrics CSV exports into formatted, readable HTML reports.
 
