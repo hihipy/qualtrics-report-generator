@@ -17,7 +17,7 @@ Built for **administrative data intake surveys** where different respondents com
 
 ## Why This Tool Exists
 
-Standard Qualtrics reports are designed for traditional surveys with many respondents answering the same questions. But many institutional surveys work differently:
+Standard Qualtrics reports are designed for traditional surveys with many respondents answering the same questions. Many institutional surveys work differently:
 
 | Traditional Survey | Administrative Data Intake |
 |-------------------|---------------------------|
@@ -25,7 +25,7 @@ Standard Qualtrics reports are designed for traditional surveys with many respon
 | You want: percentages, charts, trends | You want: readable responses organized by question |
 | Qualtrics Reports work great | Qualtrics Reports are awkward and hard to review |
 
-This tool solves the data intake problem by generating a clean HTML report where each question displays its respondent(s) and their answers in a readable format. Good for review, validation, and sharing.
+This tool handles the data intake case by generating a clean HTML report where each question displays its respondent(s) and their answers in a readable format. Good for review, validation, and sharing.
 
 ---
 
@@ -56,12 +56,12 @@ This tool solves the data intake problem by generating a clean HTML report where
 | Feature | Description |
 |---------|-------------|
 | **QSF Metadata Support** | Uses your survey definition file for accurate question text and choice labels |
-| **Smart Question Detection** | Auto-recognizes single, grouped, matrix, and form question types |
+| **Question Detection** | Recognizes single, grouped, matrix, and form question types |
 | **Matrix Table Rendering** | Displays matrix responses as proper HTML tables with row/column headers |
 | **Dual Interface** | GUI for interactive use, CLI for automation and scripting |
-| **Rich Value Formatting** | Detects URLs, files, coordinates, JSON, dates, and more |
+| **Value Formatting** | Detects URLs, files, coordinates, JSON, dates, and more |
 | **Colorblind-Friendly** | Accessible color palette (blue/teal/orange) safe for all vision types |
-| **XSS-Safe Output** | All content escaped. Safe to host or share publicly |
+| **XSS-Safe Output** | All content escaped, safe to host or share publicly |
 | **Debug Mode** | Optional metadata showing question types and column counts |
 
 ---
@@ -82,7 +82,7 @@ sudo apt-get install python3-tk
 sudo dnf install python3-tkinter
 ```
 
-> **Note:** The CLI works without Tkinter. GUI is optional.
+> **Note:** The CLI works without Tkinter. The GUI is optional.
 
 ---
 
@@ -192,7 +192,7 @@ python qualtrics_report_generator.py -q survey.qsf -l debug.log survey.csv
 
 ## Output Format
 
-The generator produces a single, self-contained HTML file with embedded CSS. No external dependencies. Just open in any browser.
+The generator produces a single, self-contained HTML file with embedded CSS. No external dependencies. Just open it in any browser.
 
 ### Report Structure
 ```
@@ -324,10 +324,12 @@ qualtrics-report-generator/
 This project is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 You are free to:
+
 - Use, share, and adapt this work
 - Use it at your job
 
 Under these terms:
-- **Attribution** — Credit the original author
-- **NonCommercial** — No selling or commercial products
-- **ShareAlike** — Derivatives must use the same license
+
+- **Attribution:** Credit the original author
+- **NonCommercial:** No selling or commercial products
+- **ShareAlike:** Derivatives must use the same license
