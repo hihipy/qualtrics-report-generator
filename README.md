@@ -1,5 +1,14 @@
 # qualtrics-report-generator
 
+[![Link Check](https://github.com/hihipy/qualtrics-report-generator/actions/workflows/links.yml/badge.svg)](https://github.com/hihipy/qualtrics-report-generator/actions/workflows/links.yml)
+[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+**Built with**
+
+[![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)](https://python.org)
+[![pandas](https://img.shields.io/badge/pandas-150458?style=flat&logo=pandas&logoColor=white)](https://pandas.pydata.org)
+[![Tkinter](https://img.shields.io/badge/Tkinter-FFD43B?style=flat&logo=python&logoColor=black)](https://docs.python.org/3/library/tkinter.html)
+
 A Python utility that converts Qualtrics CSV exports into formatted, readable HTML reports.
 
 Built for **administrative data intake surveys** where different respondents complete different sections, such as institutional reporting surveys, compliance questionnaires, and rankings data collection. Use this when you need to review each response in context rather than aggregate statistics.
